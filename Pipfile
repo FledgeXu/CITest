@@ -11,3 +11,6 @@ pytest-cov = "*"
 
 [requires]
 python_version = "3.11"
+
+[scripts]
+test = "pytest --cov=testpackage tests --junitxml=junit-reports/TEST-report.xml --cov-report xml:junit-reports/TEST-cov.xml"
