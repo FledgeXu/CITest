@@ -2,7 +2,9 @@ name: CI
 
 on: [pull_request]
 
-permissions: write-all
+permissions:
+  contents: read
+  checks: write
 
 jobs:
   unit-tests:
@@ -31,4 +33,3 @@ jobs:
         with:
           coverageFile: junit-reports/TEST-cov.xml
           token: ${{ secrets.GITHUB_TOKEN }}
-          if: success() || failure() # always run even if the previous step fails
