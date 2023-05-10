@@ -24,6 +24,11 @@ jobs:
           pip install pipenv
       - name: pipenv dependencies
         run: pipenv sync --dev
+      - name: run formatting
+        run: |
+          #pipenv run lint
+          #echo "is_formatted=$?" >> "$GITHUB_ENV"
+          pipenv run lintfix
       - name: run tests
         run: pipenv run test || true
       - name: Publish Test Report
@@ -34,3 +39,8 @@ jobs:
           path: junit-reports/TEST-cov.xml
           show_missing: true
           minimum_coverage: 75
+      - name: Annotate diff changes using reviewdog
+        #if: ${{ env.is_formatted }} != 0
+        uses: reviewdog/action-suggester@v1
+        with:
+          tool_name: blackfmt
