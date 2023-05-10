@@ -33,3 +33,4 @@ jobs:
         with:
           path: junit-reports/TEST-cov.xml
           show_missing: true
+          minimum_coverage: 75
