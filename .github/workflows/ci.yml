@@ -31,3 +31,4 @@ jobs:
         with:
           coverageFile: junit-reports/TEST-cov.xml
           token: ${{ secrets.GITHUB_TOKEN }}
+          if: success() || failure() # always run even if the previous step fails
