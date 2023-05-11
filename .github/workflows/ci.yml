@@ -2,13 +2,8 @@ name: CI
 
 on: [pull_request]
 
-  #permissions:
-  #  contents: read
-  #  checks: write
-  #  pull-requests: write
-
 jobs:
-  unit-tests:
+  build-tests:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v1
@@ -34,6 +29,21 @@ jobs:
           tool_name: blackfmt
       - name: run tests
         run: pipenv run test || true
+
+---
+name: report
+on:
+  workflow_run:
+    workflows: [build]
+    types: [completed]
+    
+permissions:
+  checks: write
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v3
         if: success() || failure() # always run even if the previous step fails
