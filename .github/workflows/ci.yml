@@ -32,7 +32,6 @@ jobs:
         uses: reviewdog/action-suggester@v1
         with:
           tool_name: blackfmt
-          reviewdog_flags: '-d'
       - name: run tests
         run: pipenv run test || true
       - name: Publish Test Report
