@@ -18,6 +18,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
+          cache: "pipenv"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -25,10 +26,13 @@ jobs:
       - name: pipenv dependencies
         run: pipenv sync --dev
       - name: run formatting
-        run: |
-          #pipenv run lint
-          #echo "is_formatted=$?" >> "$GITHUB_ENV"
-          pipenv run lintfix
+        run:
+          pipenv run format
+      - name: Annotate diff changes using reviewdog
+        uses: reviewdog/action-suggester@v1
+        with:
+          tool_name: blackfmt
+          reviewdog_flags: '-d'
       - name: run tests
         run: pipenv run test || true
       - name: Publish Test Report
@@ -39,8 +43,3 @@ jobs:
           path: junit-reports/TEST-cov.xml
           show_missing: true
           minimum_coverage: 75
-      - name: Annotate diff changes using reviewdog
-        #if: ${{ env.is_formatted }} != 0
-        uses: reviewdog/action-suggester@v1
-        with:
-          tool_name: blackfmt
