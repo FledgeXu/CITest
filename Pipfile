@@ -15,5 +15,5 @@ python_version = "3.11"
 
 [scripts]
 test = "pytest --cov=testpackage tests --junitxml=junit-reports/TEST-report.xml --cov-report xml:junit-reports/TEST-cov.xml"
-lint = "black --check testpackage tests"
-lintfix = "black testpackage tests"
+check = "black -q --check --diff testpackage tests"
+format = "black testpackage tests"
