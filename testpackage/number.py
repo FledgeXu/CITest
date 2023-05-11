@@ -5,5 +5,5 @@ def square(x: float):
         return x + 2
 
 def add(x: float):
-    return x-1
+    return x+1
 
