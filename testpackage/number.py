@@ -3,3 +3,7 @@ def square(x: float):
         return x * x
     else:
         return x + 2
+
+def add(x: float):
+    return x+1
+
