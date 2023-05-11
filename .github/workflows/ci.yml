@@ -1,9 +1,9 @@
-name: CI
+name: build
 
 on: [pull_request]
 
 jobs:
-  build-tests:
+  build:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v1
@@ -29,3 +29,9 @@ jobs:
           tool_name: blackfmt
       - name: run tests
         run: pipenv run test || true
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v3
+        if: always() # always run even if the previous step fails
+        with:
+          path: 'junit-reports'
+          retention-days: 1
