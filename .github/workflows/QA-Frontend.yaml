@@ -1,12 +1,13 @@
 name: QA-Frontend
 
 on:
-  pull_request:
-    path: [ testfolder/* ]
+  # pull_request:
+  #   path: [ testfolder/* ]
 
   push:
-    branches: [ main ]
-    path: [ testfolder/* ]
+    # branches: [ main ]
+    path: 
+      - 'testfolder/**'
 
 jobs:
   check-frontend-qa:
