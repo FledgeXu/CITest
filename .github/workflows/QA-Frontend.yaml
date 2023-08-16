@@ -7,7 +7,7 @@ on:
   push:
     branches: [ main ]
     path:
-      - 'testfolder/**'
+      - 'testfolder/*'
 
 jobs:
   check-frontend-qa:
