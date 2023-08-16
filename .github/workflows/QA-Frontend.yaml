@@ -1,0 +1,17 @@
+name: QA-Frontend
+
+on:
+  pull_request:
+    path:
+      - testfolder/**
+  push:
+    branches: [ main ]
+    path:
+      - testfolder/**
+
+jobs:
+  check-frontend-qa:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Install dependencies (and project)
+        run: echo "Hello World"
